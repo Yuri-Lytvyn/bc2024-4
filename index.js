@@ -54,13 +54,13 @@ const server = http.createServer(async (req, res) => {
     try {
       const image = await fs.readFile(filePath);
       res.writeHead(200, { 'Content-Type': 'image/jpeg' });
-      res.end(image);
+      res.end('ok');
     } catch {
       try {
         const imageBuffer = await fetchCatImage(statusCode);
         await fs.writeFile(filePath, imageBuffer);
         res.writeHead(200, { 'Content-Type': 'image/jpeg' });
-        res.end(imageBuffer);
+        res.end('ok');
       } catch {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end(`Image not found for status code ${statusCode}.`);
